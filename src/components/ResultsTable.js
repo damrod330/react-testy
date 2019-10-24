@@ -35,7 +35,6 @@ export default class ResultsTable extends Component {
                         })
                         let shiftedResultsData = [...resultsData];
                         shiftedResultsData.shift();
-                        console.log(shiftedResultsData.length)
                         if (resultsData.length > 0)
                             newResultsList.push({
                                 id: test.id,
@@ -48,7 +47,6 @@ export default class ResultsTable extends Component {
                                 downloadLink: getCsvLink(resultsData, test.id)
                             })
                     })
-                    console.log(newResultsList);
                     return newResultsList
                 }
                 return [];

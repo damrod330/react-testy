@@ -13,7 +13,8 @@ class App extends Component {
       testList: testList,
       currentTestId: "T01",
       repeatAmount: 50,
-      measures: null
+      measures: null,
+      oddProp: false
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -31,20 +32,16 @@ class App extends Component {
   }
 
   handleRunTestClicked() {
-    let currentTest = this.state.testList.find(test => test.id === this.state.currentTestId);
-    try{
-      this.runTest(currentTest, this.state.repeatAmount)
-    } catch {
-      alert('react blokuje')
-    }
+    let test = this.state.testList.find(test => test.id === this.state.currentTestId);
+    this.runTest(test, this.state.repeatAmount)
   }
 
-  runTest(currentTest, count) {
+  runTest(test, count) {
     if (count) {
       count--;
-      ReactDOM.render(<MeasureRenderer name={currentTest.id}> {currentTest.component} </MeasureRenderer>, document.getElementById('test-area'), () => {
-        // on done
-        this.runTest(currentTest, count)
+      this.setState({ oddProp: !this.state.oddProp });
+      ReactDOM.render(<MeasureRenderer id={test.id} props={test.props[this.state.oddProp ? 1 : 0]} Component={test.component} />, document.getElementById('test-area'), () => {
+        this.runTest(test, count)
       });
     } else {
       this.updateResults();
@@ -64,6 +61,7 @@ class App extends Component {
     return (
       <main className="container">
         <h2>Testy dla React</h2>
+        <h5>Więcej niż 50 powtórzeń zostanie automatycznie zablokowane przez Reacta</h5>
         <section className="card">
           <div className="form-control">
             <label>Wybierz test:</label>

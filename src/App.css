@@ -35,10 +35,8 @@ a {
   text-decoration: none;
   color: black;
   font-weight: 700;
-  opacity: 0.7;
 }
 a:hover{
-  opacity: 1;
   color:orangered;
 }
 
@@ -72,19 +70,17 @@ input, select {
 button{
   font-size: 16px;
   padding: 12px;
-  background: orange;
+  background: darkorange;
   margin: 0px;
   border: none;
   text-transform: uppercase;
   color: white;
   font-weight: 700;
   outline: none;
-  opacity: 0.7;
   transition: 0.25s;
 }
 
 button:hover {
-  opacity: 1;
   color: white;
   background:orangered;
   cursor: pointer;

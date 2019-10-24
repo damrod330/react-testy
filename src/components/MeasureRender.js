@@ -11,26 +11,26 @@ class MeasureRender extends Component {
     }
   
     render() {
-      const { name } = this.props;
+      const { id, props, Component } = this.props;
       if (this.mounted) {
-        window.performance.mark(`${name}UpdateStart`);
+        window.performance.mark(`${id}UpdateStart`);
       } else {
-        window.performance.mark(`${name}MountStart`);
+        window.performance.mark(`${id}MountStart`);
       }
-      return this.props.children;
+      return <Component {...props}/>;
     }
   
     componentDidMount() {
-      const { name } = this.props;
+      const { id } = this.props;
       this.mounted = true;
-      window.performance.mark(`${name}MountEnd`);
-      window.performance.measure(`${name}Mount`, `${name}MountStart`, `${name}MountEnd`);
+      window.performance.mark(`${id}MountEnd`);
+      window.performance.measure(`${id}Mount`, `${id}MountStart`, `${id}MountEnd`);
     }
   
     componentDidUpdate() {
-      const { name } = this.props;
-      window.performance.mark(`${name}UpdateEnd`);
-      window.performance.measure(`${name}Update`, `${name}UpdateStart`, `${name}UpdateEnd`);
+      const { id } = this.props;
+      window.performance.mark(`${id}UpdateEnd`);
+      window.performance.measure(`${id}Update`, `${id}UpdateStart`, `${id}UpdateEnd`);
     }
   }
 
