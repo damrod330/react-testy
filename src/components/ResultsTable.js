@@ -33,17 +33,11 @@ export default class ResultsTable extends Component {
                         }).map(measure => {
                             return measure.duration
                         })
-                        let shiftedResultsData = [...resultsData];
-                        shiftedResultsData.shift();
                         if (resultsData.length > 0)
                             newResultsList.push({
                                 id: test.id,
                                 name: test.name,
-                                iterations: resultsData.length,
-                                firstRunTime: resultsData[0],
-                                avgRunTime: shiftedResultsData.reduce((sum, value) => {
-                                    return sum + value;
-                                }) / shiftedResultsData.length,
+                                data: resultsData,
                                 downloadLink: getCsvLink(resultsData, test.id)
                             })
                     })
@@ -51,28 +45,26 @@ export default class ResultsTable extends Component {
                 }
                 return [];
             }
-
-
-            let newState = {
+            return {
                 measures: props.measures,
                 resultList: getNewResultList(props.measures)
-            }
-            console.log(newState);
-            return newState;
+            };
+        } else {
+            return current_state
         }
-        return null
     }
-
 
     render() {
         let results;
         const resultList = this.state.resultList.map(result => {
             return (<tr key={result.id}>
                 <td>{result.id}</td>
-                <td>{result.iterations}</td>
-                <td>{result.firstRunTime}</td>
-                <td>{result.avgRunTime}</td>
-                <td><a href={result.downloadLink} download={result.id+".csv"}>Pobierz</a></td>
+                <td>{result.data.length}</td>
+                <td>{result.data.shift()}</td>
+                <td>{result.data.length > 0 ? result.data.reduce((sum, item) => {
+                    return sum + item;
+                }) / result.data.length : 'brak elementów'}</td>
+                <td><a href={result.downloadLink} download={result.id + ".csv"}>Pobierz</a></td>
             </tr>)
         });
 

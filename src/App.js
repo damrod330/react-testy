@@ -40,7 +40,7 @@ class App extends Component {
     if (count) {
       count--;
       this.setState({ oddProp: !this.state.oddProp });
-      ReactDOM.render(<MeasureRenderer id={test.id} props={test.props[this.state.oddProp ? 1 : 0]} Component={test.component} />, document.getElementById('test-area'), () => {
+      ReactDOM.render(<MeasureRenderer id={test.id} props={test.props[this.state.oddProp ? 1 : 0]} Component={test.run} />, document.getElementById('test-area'), () => {
         this.runTest(test, count)
       });
     } else {
@@ -55,13 +55,12 @@ class App extends Component {
   render() {
 
     const options = this.state.testList.map(test => {
-    return (<option key={test.id} value={test.id}>[{test.id}] {test.name}</option>)
+      return (<option key={test.id} value={test.id}>[{test.id}] {test.name}</option>)
     })
 
     return (
       <main className="container">
         <h2>Testy dla React</h2>
-        <h5>Więcej niż 50 powtórzeń zostanie automatycznie zablokowane przez Reacta</h5>
         <section className="card">
           <div className="form-control">
             <label>Wybierz test:</label>
@@ -78,9 +77,8 @@ class App extends Component {
             <button type="button" onClick={this.handleRunTestClicked}>Uruchom</button>
           </div>
         </section>
-        <ResultsTable measures={this.state.measures}/>
+        <ResultsTable measures={this.state.measures} />
         <section className="card" id="test-area">
-
         </section>
       </main>
     );
