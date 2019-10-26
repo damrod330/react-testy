@@ -36,9 +36,8 @@ export default class DomEditListTest extends Component {
     }
 
     render() {
-        // console.log(this.state.list)
         return (
-            <ul id="T03">
+            <ul>
                 {this.state.list}
             </ul>
         )

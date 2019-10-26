@@ -15,14 +15,15 @@ export default class GetDataFromFormTest extends Component {
     }
 
     static getDerivedStateFromProps(props, current_state) {
-
-        console.log("Username: " + props.username + "/n Password: " + props.password)
-
         return {
             username: props.username,
             password: props.password
         }
 
+    }
+
+    componentDidUpdate(){
+        console.log("Username: " + this.state.username + "/n Password: " + this.state.password)
     }
 
     handleChangeUsername(e) {

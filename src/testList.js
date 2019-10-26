@@ -66,7 +66,7 @@ const testList =
         },
         {
             id: "T07",
-            name: "Zdarzenia - Pobieranie danych z formy",
+            name: "Wklejanie i pobieranie danych z formularza",
             run: GetDataFromFormTest,
             props: [
                 { username: "admin", password: "admin" },
