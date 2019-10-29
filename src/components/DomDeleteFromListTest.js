@@ -5,20 +5,23 @@ export default class DomDeleteFromListTest extends Component {
     constructor(props) {
         super(props)
 
+        let newList = []
+            for (let i = 0; i <= 10; i++) {
+                let jsx = (<li key={i}>Prosty element listy {i}</li>)
+                newList.push(jsx);
+            }
+
         this.state = {
             targets: [],
-            list: []
+            list: newList,
+            editedList: []
         }
     }
 
     static getDerivedStateFromProps(props, current_state) {
         if (current_state.targets !== props.targets) {
             
-            let newList = []
-            for (let i = 0; i <= 10; i++) {
-                let jsx = (<li key={i}>Prosty element listy {i}</li>)
-                newList.push(jsx);
-            }
+            let newList = [...current_state.list]
 
             props.targets.forEach(target => {
                 newList.splice(target, 1)
@@ -26,7 +29,7 @@ export default class DomDeleteFromListTest extends Component {
 
             return {
                 targets: props.targets,
-                list: newList
+                editedList: newList
             }
         } else {
             return null;
@@ -38,7 +41,7 @@ export default class DomDeleteFromListTest extends Component {
     render() {
         return (
             <ul>
-                {this.state.list}
+                {this.state.editedList}
             </ul>
         )
     }
